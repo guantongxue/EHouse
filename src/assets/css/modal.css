@@ -1,0 +1,22 @@
+.ant-modal-body{
+    padding: 0 !important;
+}
+.ant-modal-content{
+    width: 680px !important;
+}
+.ant-modal{
+    margin: 0 26%  !important;
+}
+.ant-tabs{
+    margin-top: 15px !important;
+}
+
+.ant-tabs-nav {
+    padding-left: 80px !important;
+}
+.ant-tabs-nav .ant-tabs-tab-active{
+    color:#FF787E !important;
+}
+.ant-tabs-ink-bar {
+    background-color:#FF787E !important;
+}
