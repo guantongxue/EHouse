@@ -1,11 +1,17 @@
 .ant-modal-body{
     padding: 0 !important;
+    /* position: fixed  !important; */
+    margin-top: 22% !important;
+    background-color: white;
+    /* transition: 1s; */
 }
 .ant-modal-content{
     width: 680px !important;
 }
 .ant-modal{
-    margin: 0 26%  !important;
+    margin-left: 34% !important;
+
+    /* margin: 0 26%  !important; */
 }
 .ant-tabs{
     margin-top: 15px !important;

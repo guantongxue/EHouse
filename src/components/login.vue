@@ -38,7 +38,7 @@
                             <!-- 密码登录 -->
                             <div v-if="isPwd">
                                 <div class="login-title">
-                                    <a-icon type="user" /><span>密码登录</span>
+                                    <a-icon type="user" /><span>&nbsp;密码登录</span>
                                 </div>
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入账号">
@@ -61,7 +61,7 @@
                             <!-- 手机验证登录 -->
                             <div v-else>
                                  <div class="login-title">
-                                    <a-icon type="mobile" /><span>手机验证登录</span>
+                                    <a-icon type="mobile" /><span>&nbsp;手机验证登录</span>
                                 </div>
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入手机号">
@@ -84,13 +84,13 @@
                         </a-tab-pane>
                         <a-tab-pane key="2">
                         <span slot="tab">
-                            <a-icon type="shopping-cart" />
+                            <a-icon type="usergroup-add" />
                             企业登录
                         </span>
                          <!-- 密码登录 -->
                             <div>
                                 <div class="login-title">
-                                    <a-icon type="user" /><span>密码登录</span>
+                                    <a-icon type="user" /><span>&nbsp;密码登录</span>
                                 </div>
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入账号">
@@ -212,6 +212,7 @@ ul,li{
     display: inline-block;
     width: 402px;
     height: 420px;
+    background: white !important;
 }
 .test{
     width:402px;
@@ -334,4 +335,5 @@ ul,li{
     user-select: none;
     right: -13px;
 }
+
 </style>

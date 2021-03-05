@@ -3,16 +3,14 @@
     <a-layout id="components-layout-demo-top" class="layout">
       <layout-header></layout-header>
       <a-layout-content style="padding: 0 50px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item>List</a-breadcrumb-item>
-          <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
-        <div
+        <!-- 分类 -->
+        <crumd></crumd>
+        <index-content></index-content>
+        <!-- <div
           :style="{ background: '#fff', padding: '24px', minHeight: '1200px' }"
         >
           Content
-        </div>
+        </div> -->
       </a-layout-content>
       <right-slider></right-slider>
       <a-layout-footer style="text-align: center">
@@ -25,10 +23,15 @@
 <script>
 import LayoutHeader from '../components/header.vue';
 import RightSlider from '../components/rightSlider.vue';
+import Crumd from '../components/crumd.vue';
+import IndexContent from '../components/indexContent.vue';
+import "../assets/css/content.css";
 export default {
   components:{
     LayoutHeader,
-    RightSlider
+    RightSlider,
+    Crumd,
+    IndexContent
   },
 
 };
@@ -36,13 +39,5 @@ export default {
 
 <style>
 
-/* #components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  background: url('../assets/ehouse.svg');
-  margin: 16px 24px 16px 0;
-  float: left;
-} */
 
 </style>
