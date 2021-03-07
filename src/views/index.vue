@@ -36,13 +36,6 @@ export default {
 
 <style>
 
-/* #components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  background: url('../assets/ehouse.svg');
-  margin: 16px 24px 16px 0;
-  float: left;
-} */
+
 
 </style>

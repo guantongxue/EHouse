@@ -43,11 +43,6 @@
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入账号">
                                     <input type="text" class="login-pwd" placeholder="请输入密码">
-                                    <!-- <div class="tel-login-send-code">
-                                        <input type="text" class="tel-login-tel-code" placeholder="短信验证码">
-                                        <a id="send-code-btn">发送验证码</a>
-                                        <a id="CaptchaEl" data-appid="2032266202" data-cbfn="callback" type="button" class="slider_captcha" style="display: none;">发送验证码</a>
-                                    </div> -->
                                     <div class="tel-login-error"></div>
                                     <a class="login-submit">立即登录</a>
                                 </div>
@@ -55,6 +50,12 @@
                                     <ul>
                                         <li @click="changeType">手机验证登录</li>
                                         <li>更多登录方式</li>
+                                    </ul>
+                                </div>
+                                <div class="login-change-type2">
+                                    <ul>
+                                        <li @click="userRegister">立即注册</li>
+                                        <li>忘记密码？</li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,8 +67,8 @@
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入手机号">
                                     <!-- <input type="text" class="login-pwd" placeholder="请输入密码"> -->
-                                    <div class="tel-login-send-code">
-                                        <input type="text" class="tel-login-tel-code" placeholder="短信验证码">
+                                    <div class="login-send-code">
+                                        <input type="text" class="login-tel-code" placeholder="短信验证码">
                                         <a id="send-code-btn">发送验证码</a>
                                         <a id="CaptchaEl" data-appid="2032266202" data-cbfn="callback" type="button" class="slider_captcha" style="display: none;">发送验证码</a>
                                     </div>
@@ -78,6 +79,12 @@
                                     <ul>
                                         <li @click="changeType">密码验证登录</li>
                                         <li>更多登录方式</li>
+                                    </ul>
+                                </div>
+                                <div class="login-change-type2">
+                                    <ul>
+                                        <li  @click="userRegister">立即注册</li>
+                                        <li>忘记密码？</li>
                                     </ul>
                                 </div>
                             </div>
@@ -95,11 +102,6 @@
                                 <div class="login-input-area">
                                     <input type="text" class="login-userInfo" placeholder="请输入账号">
                                     <input type="text" class="login-pwd" placeholder="请输入密码">
-                                    <!-- <div class="tel-login-send-code">
-                                        <input type="text" class="tel-login-tel-code" placeholder="短信验证码">
-                                        <a id="send-code-btn">发送验证码</a>
-                                        <a id="CaptchaEl" data-appid="2032266202" data-cbfn="callback" type="button" class="slider_captcha" style="display: none;">发送验证码</a>
-                                    </div> -->
                                     <div class="tel-login-error"></div>
                                     <a class="login-submit">立即登录</a>
                                 </div>
@@ -107,6 +109,12 @@
                                     <ul>
                                         <!-- <li @click="changeType">手机验证登录</li> -->
                                         <li>更多登录方式</li>
+                                    </ul>
+                                </div>
+                                <div class="login-change-type2">
+                                    <ul>
+                                        <li  @click="userRegister">立即注册</li>
+                                        <li>忘记密码？</li>
                                     </ul>
                                 </div>
                             </div>
@@ -148,11 +156,14 @@ export default {
     },
     changeType(){
         this.isPwd = !this.isPwd
+    },
+    userRegister(){
+        this.$router.push('/register')
     }
   }
 }
 </script>
-<style  scoped>
+<style scoped>
 ul,li{
     list-style: none;
     padding: 0;
@@ -305,10 +316,10 @@ ul,li{
 .login-change-type ul li:hover{
     color: rgba(255,120,126,1);
 }
-.tel-login-send-code{
+.login-send-code{
     position: relative;
 }
-.tel-login-tel-code{
+.login-tel-code{
     margin-bottom: 28px;
     height: 36px;
     line-height: 36px;
@@ -333,5 +344,29 @@ ul,li{
     cursor: pointer;
     user-select: none;
     right: -13px;
+}
+.login-change-type2{
+    width: 100%;
+}
+.login-change-type2 ul{
+    margin-top: 5px;
+    margin-left:22px ;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.login-change-type2 ul li:nth-child(1){
+    width: 49px;
+    font-size: 12px;
+    color: black;
+}
+.login-change-type2 ul li:nth-child(2){
+    padding-left: 21px;
+    width: 90px;
+    font-size: 12px;
+    color: black;
+}
+.login-change-type2 ul li:hover{
+    color: rgba(255, 120, 126, 1);
 }
 </style>
