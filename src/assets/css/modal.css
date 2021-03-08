@@ -26,3 +26,21 @@
 .ant-tabs-ink-bar {
     background-color:#FF787E !important;
 }
+.ant-steps-navigation .ant-steps-item::before{
+    background-color:#FF787E !important;
+}
+html {
+    --antd-wave-shadow-color: #FF787E !important;
+}
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon{
+    color: #FF787E !important;
+}
+.ant-steps-item-custom.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon{
+    color: #FF787E !important;
+}
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after{
+    background-color: #FF787E !important;
+}
+.ant-input:hover{
+    border-color: #FF787E !important;
+}
