@@ -1,7 +1,7 @@
 .ant-modal-body{
     padding: 0 !important;
     /* position: fixed  !important; */
-    margin-top: 22% !important;
+    margin-top: 10% !important;
     background-color: white;
     /* transition: 1s; */
 }
@@ -9,7 +9,7 @@
     width: 680px !important;
 }
 .ant-modal{
-    margin-left: 34% !important;
+    margin-left: 28% !important;
 
     /* margin: 0 26%  !important; */
 }

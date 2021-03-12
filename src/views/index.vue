@@ -1,11 +1,19 @@
 <template>
   <div>
     <a-layout id="components-layout-demo-top" class="layout">
-      <layout-header></layout-header>
+      <layout-header ref="layout_header" 
+      @logout="logoutContent" 
+      @userLogin="userLogin"
+      :positionCity="positionCity"
+      >
+
+      </layout-header>
       <a-layout-content style="padding: 0 50px">
         <!-- 分类 -->
         <crumd></crumd>
         <index-content></index-content>
+
+
         <!-- <div
           :style="{ background: '#fff', padding: '24px', minHeight: '1200px' }"
         >
@@ -26,13 +34,70 @@ import RightSlider from '../components/rightSlider.vue';
 import Crumd from '../components/crumd.vue';
 import IndexContent from '../components/indexContent.vue';
 import "../assets/css/content.css";
+import { mapActions,mapState} from 'vuex'
+import {UserLogin} from "@/api/userService.js"
+import {getPosition} from "@/api/map.js"
+import axios from 'axios'
 export default {
+  data(){
+    return{
+      positionCity:"未加载"
+    }
+  },
   components:{
     LayoutHeader,
     RightSlider,
     Crumd,
     IndexContent
   },
+  computed:{
+
+  },
+  methods:{
+    ...mapActions(['logout','userInfo']),
+    logoutContent(){
+      this.logout()
+    },
+    userLogin(userForm){
+      console.log("用户信息",userForm);
+      let body = {
+        username:userForm.username,
+        password:userForm.password
+      }
+      UserLogin(body).then(res=>{
+        console.log("当前信息",res);
+        if(res.code == 200){
+          this.$notification['success']({
+          message: '登录成功',
+          });
+          console.log("ref",this.$refs.layout_header)
+          this.$refs.layout_header.visible = false
+          let details={
+            username:res.data.username,
+            token:res.token,
+            refreshToken:res.refreshtoken
+          };
+          this.$store.commit('userInfo', details)
+          // this.userInfo.set(details)
+        }else{
+          this.$notification['error']({
+          message: res.message,
+          });
+        }
+      })
+    },
+    logout(){
+      this.$store.commit('logout')
+    }
+  },
+  mounted(){
+    getPosition().then(res=>{
+      if(res.code == 200){
+        this.positionCity = res.data.city
+      }
+      console.log("res",res)
+    })
+  }
 
 };
 </script>

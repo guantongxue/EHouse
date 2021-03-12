@@ -2,18 +2,18 @@ import axios from 'axios'
 import qs from 'qs'
 import store from '../store'
 
-
+// const baseURI = '/mapApi'
 // axios.defaults.baseURL = 'http://127.0.0.1:9527/'
-
+// https://restapi.amap.com/v3/ip?key=4ce136b9d07cd583aaa787e820f12d50
 /**
  * 自定义实例默认值
  */
 const instance = axios.create({
-    baseURL:'/api',
+    baseURL:'/mapApi',
+    // baseURL:'https://restapi.amap.com/v3',
     timeout: 15000, // 请求超时时间
     withCredentials: true
   })
-
 /**
  * 添加请求拦截器 ，意思就是发起请求接口之前做什么事，一般都会发起加载一个loading
  */
@@ -28,13 +28,11 @@ const instance = axios.create({
         if (config.method == 'post') {
           config.data = {
             ...config.data,
-            _t: Date.parse(new Date()) / 1000
           }
         } else if (config.method == 'get') {
-          config.params = {
-            _t: Date.parse(new Date()) / 1000,
-            ...config.params
-          }
+        //   config.params = {
+        //     ...config.params
+        //   }
         }
         return config
       },
@@ -50,20 +48,18 @@ const instance = axios.create({
  */
  instance.interceptors.response.use(
     response => {
-      let res = response.data
+      let res = response
       return res
     },
     error => {
       return Promise.reject(error)
     }
   )
-/**
- * 使用es6中的类，进行简单封装
- */
  class ajaxhttp {
     // 使用async ... await
-    static async get (url, params) {
+    static async get (url,params) {
       // eslint-disable-next-line no-return-await
+      console.log('参数',params)
       return await instance.get(url, {
         params: params
       })
@@ -76,6 +72,7 @@ const instance = axios.create({
       // eslint-disable-next-line no-return-await
       return await instance.post(url, params)
     }
+
   }
 
 

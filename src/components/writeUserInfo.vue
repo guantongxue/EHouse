@@ -1,14 +1,18 @@
 <template>
     <div class="userInfo-content">
         <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
-            <a-form-item label="用户名" has-feedback :validate-status="username_status" :required="true">
+            <a-form-item label="用户名" has-feedback :validate-status="username_status"
+             :required="true" :help="isDifferent?'用户名已存在':''">
                 <a-input v-model="form.username" id="success" placeholder="请输入用户名" />
             </a-form-item>
+            <!-- <a-form-item label="" has-feedback >
+                <span>用户名已存在</span>
+            </a-form-item> -->
             <a-form-item label="用户密码" has-feedback :validate-status="password_status" :required="true">
-                <a-input v-model="form.password" id="success" placeholder="请输入用户密码" />
+                <a-input-password v-model="form.password" id="success" placeholder="请输入用户密码" />
             </a-form-item>
             <a-form-item label="确认密码" has-feedback :validate-status="surepwd_status" :required="true">
-                <a-input v-model="form.surepwd" id="success" placeholder="请确认用户密码" />
+                <a-input-password v-model="form.surepwd" id="success" placeholder="请确认用户密码" />
             </a-form-item>
             <a-form-item label="用户描述" has-feedback >
                 <a-input v-model="form.userdesc" id="success" placeholder="请输入用户描述" />
@@ -23,6 +27,7 @@
 </template>
 
 <script>
+import {DuplicateName} from "@/api/userService.js"
 export default {
     name:'writeUserInfo',
     props:{
@@ -49,7 +54,7 @@ export default {
             username_status:'',
             password_status:'',
             surepwd_status:'',
-
+            isDifferent:false
         };
     },
     components:{
@@ -63,7 +68,27 @@ export default {
            }else{
                this.$emit("submitUserInfo",this.form)
            }
-           
+       },
+       isDifferentName(val){
+           let flag = false
+           let body={
+               username:val
+           }
+           DuplicateName(body).then(res=>{
+               console.log("信息",res);
+               if(res.code == 200){
+                   this.username_status ="success"
+                   this.isDifferent = false
+               }else{
+                   this.username_status ="error"
+                   this.isDifferent = true
+               }
+               if(val ==""){
+                   this.username_status =""
+                   this.isDifferent = false
+               }
+
+           })
        }
     },
     computed:{
@@ -73,10 +98,13 @@ export default {
     form: {
     　　handler(newName, oldName) {
       　　// ...
+            const vm = this
             if(newName.username !=""){
                 this.username_status ="success"
                 if(newName.username.match(/^[ ]*$/) || newName.username.indexOf(" ")>-1){
                     this.username_status ="error"
+                }else{
+                    vm.isDifferentName(newName.username)
                 }
 
             }else{

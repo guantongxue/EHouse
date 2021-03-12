@@ -41,14 +41,14 @@
                                     <a-icon type="user" /><span>&nbsp;密码登录</span>
                                 </div>
                                 <div class="login-input-area">
-                                    <input type="text" class="login-userInfo" placeholder="请输入账号">
-                                    <input type="text" class="login-pwd" placeholder="请输入密码">
+                                    <input type="text" v-model="userForm.username" class="login-userInfo" placeholder="请输入账号">
+                                    <input type="password" v-model="userForm.password" class="login-pwd" placeholder="请输入密码">
                                     <div class="tel-login-error"></div>
-                                    <a class="login-submit">立即登录</a>
+                                    <a class="login-submit" @click="userLogin">立即登录</a>
                                 </div>
                                 <div class="login-change-type">
                                     <ul>
-                                        <li @click="changeType">手机验证登录</li>
+                                        <!-- <li @click="changeType">手机验证登录</li> -->
                                         <li>更多登录方式</li>
                                     </ul>
                                 </div>
@@ -135,7 +135,11 @@ export default {
   name: 'login',
   data(){
       return{
-          isPwd:true
+          isPwd:true,
+          userForm:{
+              username:"",
+              password:""
+          }
       }
   },
   props:{
@@ -159,6 +163,14 @@ export default {
     },
     userRegister(){
         this.$router.push('/register')
+    },
+    userLogin(){
+        if(this.userForm.username.match(/^[ ]*$/) || this.userForm.username.indexOf(" ")>-1 || this.userForm.password.match(/^[ ]*$/) || this.userForm.password.indexOf(" ")>-1){
+            this.$message.error("用户信息输入不正确");
+            return
+        }else{
+            this.$emit("userLogin",this.userForm)
+        }
     }
   }
 }

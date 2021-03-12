@@ -2,11 +2,12 @@
 export default{
 	userInfo(state,userInfo){
 		state.userInfo=userInfo;
-		sessionStorage.setItem('userInfo',JSON.stringify(state.userInfo))
+		localStorage.setItem('userInfo',JSON.stringify(state.userInfo))
 	},
 
 	logout(state){
-		sessionStorage.setItem('userInfo',null);
+		state.userInfo = null;
+		localStorage.setItem('userInfo',null);
 	},
 	// addCart(state,goods){
 	// 	let hasExist=state.cart.some((item)=>{

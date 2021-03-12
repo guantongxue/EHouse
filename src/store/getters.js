@@ -1,16 +1,11 @@
 export default{
 	userInfos(state){
 		let userInfos=state.userInfo
-		if((userInfos==undefined)||(userInfos==null))return 0;
+		if((userInfos==undefined)||(userInfos==null))return null;
 		let details={
-			userid:userInfos.userid,
-			birthday:userInfos.birthday,
-			deptname:userInfos.deptname,
-			entrytime:userInfos.entrytime,
-			graduationtime:userInfos.graduationtime,
-			offadd:userInfos.offadd,
-			persontype:userInfos.persontype,
-			position:userInfos.position
+			username:userInfos.username,
+			token:userInfos.token,
+			refreshToken:userInfos.refreshtoken
 		};
 		return details;
 	},

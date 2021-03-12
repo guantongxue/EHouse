@@ -6,7 +6,7 @@
       </a-col>
       <a-col :span="5">
         <a-icon type="environment" />
-        <a-button type="link" class="environment-button"> 福州 </a-button>
+        <a-button type="link" class="environment-button"> {{positionCity}} </a-button>
       </a-col>
       <a-col :span="17">
            <a-row>
@@ -38,18 +38,18 @@
                    <a-col :span="8">房源管理</a-col>
                    <a-col :span="3">
                       <div>
-                        <a-dropdown v-if="false">
+                        <a-dropdown v-if="getUserInfo!=null">
                           <a-avatar shape="square" @click="e => e.preventDefault()"
                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
                           <a-menu slot="overlay">
                             <a-menu-item>
-                              <a href="javascript:;" @click="login">登录/注册</a>
+                              <a href="javascript:;" >欢迎您:{{$store.state.userInfo.username}}</a>
                             </a-menu-item>
                             <a-menu-item>
-                              <a href="javascript:;">2nd menu item</a>
+                              <a href="javascript:;">个人中心</a>
                             </a-menu-item>
                             <a-menu-item>
-                              <a href="javascript:;">退出登录</a>
+                              <a href="javascript:;" @click="logout">退出登录</a>
                             </a-menu-item>
                           </a-menu>
                         </a-dropdown>
@@ -59,6 +59,7 @@
                         <!-- 登录注册弹窗 -->
                         <login @showModal="showModal"
                                @hideModal="hideModal" :visible="visible"
+                               @userLogin="userLogin"
                                >
                         </login>
                       </div>
@@ -73,7 +74,17 @@
 
 <script>
 import Login from './login.vue';
+// import {mapActions,mapState} from "vuex"
+
 export default {
+    props:{
+      // userInfo:{
+      //   type:Object
+      // }
+      positionCity:{
+        type:String
+      }
+    },
     data() {
         return {
           visible:false
@@ -89,15 +100,25 @@ export default {
         callback(val) {
         console.log(val);
         },
-        // login(){
-        //   this.visible = true
-        // },
         showModal(){
           this.visible = true 
         },
         hideModal(){
           this.visible = false
         },
+        logout(){
+          // this.$emit("logout")
+          this.$store.commit('logout')
+        },
+        userLogin(userForm){
+           this.$emit("userLogin",userForm)
+        }
+    },
+    computed:{
+      // ...mapState(['userInfo']),
+      getUserInfo(){
+        return this.$store.state.userInfo
+      }
     }
 };
 </script>
