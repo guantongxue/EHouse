@@ -6,8 +6,10 @@
  const PORTS = {
    UserLogin: 'user/login',
    UserRegister:  'user/register',
-   DuplicateName: 'user/duplicateName'
-   
+   DuplicateName: 'user/duplicateName',
+   SelectUseDetail:'user/selectUseDetail',
+   ChangePwd:'user/changepwd',
+   ChangeUserInfo:'user/changeUserInfo',   
  }
  
  export default PORTS

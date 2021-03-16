@@ -19,11 +19,19 @@ const instance = axios.create({
  */
  instance.interceptors.request.use(
     config => {
-    // const token = store.state.user.tokenInfo.token
+    
+    let  token = '';
+    let  refreshToken ='';
+    if(store.state.userInfo != null){
+      token = store.state.userInfo.token
+      refreshToken = store.state.userInfo.refreshToken
+    }
 
-    // if (token) {
-    //   config.headers.token = token
-    // }
+    if (token !=null) {
+      config.headers.token = token
+      config.headers.refreshToken = refreshToken
+      config.headers.type = '1'
+    }
     //添加时间戳，防止页面缓存
         if (config.method == 'post') {
           config.data = {
@@ -51,9 +59,11 @@ const instance = axios.create({
  instance.interceptors.response.use(
     response => {
       let res = response.data
+      console.log("数据",response)
       return res
     },
     error => {
+      console.log("数据",error)
       return Promise.reject(error)
     }
   )

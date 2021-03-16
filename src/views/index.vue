@@ -5,6 +5,7 @@
       @logout="logoutContent" 
       @userLogin="userLogin"
       :positionCity="positionCity"
+      @gotoPerson="gotoPerson"
       >
 
       </layout-header>
@@ -75,7 +76,7 @@ export default {
           let details={
             username:res.data.username,
             token:res.token,
-            refreshToken:res.refreshtoken
+            refreshToken:res.refreshToken
           };
           this.$store.commit('userInfo', details)
           // this.userInfo.set(details)
@@ -88,6 +89,9 @@ export default {
     },
     logout(){
       this.$store.commit('logout')
+    },
+    gotoPerson(){
+      this.$router.push("/person/myCollection")
     }
   },
   mounted(){

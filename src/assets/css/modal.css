@@ -2,6 +2,7 @@
     padding: 0 !important;
     /* position: fixed  !important; */
     margin-top: 10% !important;
+    margin-bottom: 10% !important;
     background-color: white;
     /* transition: 1s; */
 }
@@ -43,4 +44,8 @@ html {
 }
 .ant-input:hover{
     border-color: #FF787E !important;
+}
+
+::selection{
+    background: #FF787E !important;
 }
