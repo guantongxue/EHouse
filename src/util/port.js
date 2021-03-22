@@ -9,7 +9,10 @@
    DuplicateName: 'user/duplicateName',
    SelectUseDetail:'user/selectUseDetail',
    ChangePwd:'user/changepwd',
-   ChangeUserInfo:'user/changeUserInfo',   
+   ChangeUserInfo:'user/changeUserInfo',
+   GetCityArea:'house/getCityArea',
+   GetHouseType:'house/getHouseType',
+   GetEnvironment:'house/getEnvironment'
  }
  
  export default PORTS

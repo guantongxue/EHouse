@@ -1,11 +1,13 @@
 <template>
   <div class="indexContent">
       <classification></classification>
+      <index-resouce-list></index-resouce-list>
   </div>
 </template>
 
 <script>
 import Classification from './classification.vue';
+import IndexResouceList from '../components/indexResouceList.vue';
 export default {
     data(){
         return{
@@ -15,7 +17,8 @@ export default {
 
     },
     components:{
-        Classification
+        Classification,
+        IndexResouceList
 
     },
 

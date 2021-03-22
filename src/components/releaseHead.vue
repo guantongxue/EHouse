@@ -2,40 +2,26 @@
   <a-layout-header class="backLayout">
     <a-row>
       <a-col :span="2">
-        <img src="../assets/ehouse.svg" class="logo" />
+        <img src="../assets/ehouse.svg" class="logo" @click="gotoIndex"/>
       </a-col>
-      <a-col :span="5">
-        <a-icon type="environment" />
-        <a-button type="link" class="environment-button"> {{positionCity}} </a-button>
+      <a-col :span="5" class="head-title">
+        <span >发布房源</span>
       </a-col>
       <a-col :span="17">
            <a-row>
                <a-col :span="3">
-                   <a-dropdown>
-                        <a class="ant-dropdown-link environment-button" >
-                        <a-icon type="menu"/>房源服务    
-                        </a>
-                        <a-menu slot="overlay" class="overlay_adst">
-                            <a-menu-item>
-                              <a href="javascript:;">购房</a>
-                             </a-menu-item>
-                            <a-menu-item>
-                              <a href="javascript:;">租房</a>
-                            </a-menu-item>
-                        </a-menu>
-                    </a-dropdown>
+                  
                </a-col>
                <a-col :span="8">
                 <!-- 搜索框 -->
-                <a-input-search class="search-input" placeholder="输入关键字" enter-button @search="onSearch" />
                </a-col>
                <a-col :span="13">
                  <a-row class="environment-button">
                    <a-col :span="5"></a-col>
                    <a-col :span="8">
-                    <span @click="gotoRelease" class="release">发布房源</span>
+                    
                    </a-col>
-                   <a-col :span="8">房源管理</a-col>
+                   <a-col :span="8"></a-col>
                    <a-col :span="3">
                       <div>
                         <a-dropdown v-if="getUserInfo!=null">
@@ -60,7 +46,6 @@
                         <login @showModal="showModal"
                                @hideModal="hideModal" :visible="visible"
                                @userLogin="userLogin"
-                               ref="login"
                                >
                         </login>
                       </div>
@@ -82,9 +67,6 @@ export default {
       // userInfo:{
       //   type:Object
       // }
-      positionCity:{
-        type:String
-      }
     },
     data() {
         return {
@@ -108,7 +90,7 @@ export default {
           this.visible = false
         },
         logout(){
-          // this.$emit("logout")
+          this.$emit("logout")
           this.$store.commit('logout')
         },
         userLogin(userForm){
@@ -117,8 +99,9 @@ export default {
         gotoPerson(){
           this.$emit("gotoPerson")
         },
-        gotoRelease(){
-          this.$emit("gotoRelease")
+        gotoIndex(){
+          this.$emit("gotoIndex")
+          
         }
     },
     computed:{
@@ -139,7 +122,7 @@ export default {
   float: left;
 }
 .backLayout{
-  /* width: 100%; */
+  width: 100%;
   position:sticky;
   top: 0;
   background: white  !important;
@@ -163,7 +146,9 @@ export default {
 .ant-input:hover{
     border-color: #FF787E !important;
 }
-.release:hover{
-  color: #FF787E;
+.head-title{
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
 }
 </style>

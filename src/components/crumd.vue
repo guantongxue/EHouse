@@ -19,8 +19,8 @@ export default {
       return{
           title:[
               {icon:"appstore",lable:"全部分类"},
-              {icon:"shopping-cart",lable:"新房"},
-              {icon:"audit",lable:"二手房"},
+              {icon:"shopping-cart",lable:"买房"},
+              {icon:"audit",lable:"租房"},
           ],
           clickedIndex:0,
 

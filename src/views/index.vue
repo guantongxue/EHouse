@@ -6,6 +6,7 @@
       @userLogin="userLogin"
       :positionCity="positionCity"
       @gotoPerson="gotoPerson"
+      @gotoRelease="gotoRelease"
       >
 
       </layout-header>
@@ -13,7 +14,7 @@
         <!-- 分类 -->
         <crumd></crumd>
         <index-content></index-content>
-
+        
 
         <!-- <div
           :style="{ background: '#fff', padding: '24px', minHeight: '1200px' }"
@@ -39,6 +40,7 @@ import { mapActions,mapState} from 'vuex'
 import {UserLogin} from "@/api/userService.js"
 import {getPosition} from "@/api/map.js"
 import axios from 'axios'
+
 export default {
   data(){
     return{
@@ -49,7 +51,8 @@ export default {
     LayoutHeader,
     RightSlider,
     Crumd,
-    IndexContent
+    IndexContent,
+
   },
   computed:{
 
@@ -85,6 +88,8 @@ export default {
           message: res.message,
           });
         }
+      }).catch(e=>{
+          this.$message.error("服务响应失败")
       })
     },
     logout(){
@@ -92,6 +97,14 @@ export default {
     },
     gotoPerson(){
       this.$router.push("/person/myCollection")
+    },
+    gotoRelease(){
+      if(this.$store.state.userInfo == null){
+        //  this.$message.warning("当前用户暂未登录")
+        this.$refs.layout_header.visible = true
+        return
+      }
+      this.$router.push("/releaseHouse")
     }
   },
   mounted(){

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import index from '@/views/index'
 import register  from "@/views/register";
 import person  from "@/views/person";
+import releaseHouse  from "@/views/releaseHouse";
 import myCollection from "@/components/person/myCollection";
 import myInfo from "@/components/person/myInfo";
 import myRelease from "@/components/person/myRelease";
@@ -54,6 +55,11 @@ const routes = [
         component: myRelease,
       },
     ]
+  },
+  {
+    path:'/releaseHouse',
+    name:'releaseHouse',
+    component: releaseHouse  //发布房源
   }
 
 ]
@@ -71,7 +77,7 @@ router.beforeEach((to, from, next) => {
   //   next()  放行  next('/login') 强制跳转
   // 登录页面放行
   const token = JSON.parse(window.localStorage.getItem('userInfo'))
-  if (to.path === '/person') {
+  if (to.path === '/person' || to.path === '/releaseHouse') {
     // 获取 token
     if (token ==null)
     {

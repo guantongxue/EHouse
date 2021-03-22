@@ -58,7 +58,7 @@ import RightSlider from '../components/rightSlider.vue';
 import {UserLogin} from "@/api/userService.js"
 import { mapActions,mapState} from 'vuex'
 export default {
-  name: "App",
+  name: "",
   components: {
     LayoutHeader,
     RightSlider,
@@ -134,7 +134,6 @@ export default {
       this.defalutSelected = this.$route.path
       console.log("gao",document.body.clientHeight)
       this.initMinHeight = document.body.clientHeight-115+"px"
-
   },
   mounted(){
   },

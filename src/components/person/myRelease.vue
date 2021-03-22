@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    我的发布
+    <img src="http://106.52.39.242/404NotFound.png" alt="">
   </div>
 </template>
 

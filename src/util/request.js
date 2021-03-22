@@ -10,7 +10,7 @@ import store from '../store'
  */
 const instance = axios.create({
     baseURL:'/api',
-    timeout: 15000, // 请求超时时间
+    //timeout: 300000, // 请求超时时间
     withCredentials: true
   })
 
@@ -32,13 +32,25 @@ const instance = axios.create({
       config.headers.refreshToken = refreshToken
       config.headers.type = '1'
     }
+    if(config.url == 'house/release'){
+      // config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+      config.headers['Content-Type'] = 'multipart/form-data;boundary =' + new Date().getTime()
+
+      console.log("config",config);
+      return config
+    }
     //添加时间戳，防止页面缓存
+    console.log("fig",config);
         if (config.method == 'post') {
+          
           config.data = {
             ...config.data,
             _t: Date.parse(new Date()) / 1000
           }
+
+          console.log("11",config);
         } else if (config.method == 'get') {
+          
           config.params = {
             _t: Date.parse(new Date()) / 1000,
             ...config.params
@@ -59,11 +71,9 @@ const instance = axios.create({
  instance.interceptors.response.use(
     response => {
       let res = response.data
-      console.log("数据",response)
       return res
     },
     error => {
-      console.log("数据",error)
       return Promise.reject(error)
     }
   )
@@ -82,7 +92,9 @@ const instance = axios.create({
       // eslint-disable-next-line no-return-await
       return await instance.post(url, qs.parse(params))
     }
-    static async fliePost (url, params) {
+    static async filePost (url, params) {
+      
+      // console.log("参数",qs.stringify(params));
       // eslint-disable-next-line no-return-await
       return await instance.post(url, params)
     }
