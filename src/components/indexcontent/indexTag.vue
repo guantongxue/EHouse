@@ -32,6 +32,10 @@ export default {
         {
           val:'',
           pid:'3'          
+        },
+        {
+          val:'',
+          pid:'4'          
         }
 
         ],
@@ -43,12 +47,13 @@ export default {
     handleClose(removedTag) {
       const tags = this.tags.filter(tag => tag !== removedTag);
       this.tags = tags;
-      this.$emit("handleClose")
+      
       this.tags.forEach((val,index)=>{
         if(this.tags[index].val == removedTag){
             this.tags[index].val = ""
         }
       })
+      this.$emit("handleClose")
     },
 
     showInput() {
@@ -58,23 +63,6 @@ export default {
       });
     },
 
-    // handleInputChange(e) {
-    //   this.inputValue = e.target.value;
-    // },
-
-    // handleInputConfirm() {
-    //   const inputValue = this.inputValue;
-    //   let tags = this.tags;
-    //   if (inputValue && tags.indexOf(inputValue) === -1) {
-    //     tags = [...tags, inputValue];
-    //   }
-    //   console.log(tags);
-    //   Object.assign(this, {
-    //     tags,
-    //     inputVisible: false,
-    //     inputValue: '',
-    //   });
-    // },
   },
 };
 </script>

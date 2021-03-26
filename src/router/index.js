@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import index from '@/views/index'
 import register  from "@/views/register";
 import person  from "@/views/person";
+import houseResouce  from "@/views/houseResouce";
 import releaseHouse  from "@/views/releaseHouse";
 import myCollection from "@/components/person/myCollection";
 import myInfo from "@/components/person/myInfo";
@@ -60,6 +61,11 @@ const routes = [
     path:'/releaseHouse',
     name:'releaseHouse',
     component: releaseHouse  //发布房源
+  },
+  {
+    path:'/houseResouce/:id',
+    name:'houseResouce',
+    component: houseResouce  //房源展示界面
   }
 
 ]

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="crmd-content">
         <div class="crumb-adst">
             <ul >
                 <li v-for="(val,index) in title" :key="index">
@@ -31,12 +31,20 @@ export default {
   },
   methods:{
       changeIndex(index){
+          let flag =false
+          if(this.clickedIndex != index){
+              flag = true
+          }
           this.clickedIndex = index
+          this.$emit('SelectHouseList')
       }
   }
 }
 </script>
 <style  scoped>
+.crmd-content{
+/* border-bottom: 1px solid rgb(190, 186, 186); */
+}
 ul li{
     list-style: none;
 }
@@ -65,7 +73,7 @@ ul li{
     padding: 3px 10px;
 }
 .crumb-adst{
-    padding-left: 8% !important; 
+    padding-left: 0% !important; 
     padding-right: 8% !important;
     padding-top: 18px;
     height: 65px;

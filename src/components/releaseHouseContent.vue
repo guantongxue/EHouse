@@ -106,7 +106,7 @@
       <a-button
         type="primary"
         @click="subInfo"
-        :disabled="form.title == '' ? true : false"
+        :disabled="form.title == '' || form.desc ==''? true : false"
       >
         提交
       </a-button>
@@ -206,8 +206,13 @@ export default {
     subInfo() {
      
       console.log("提交",this.fileList);
+      
       const formData = new FormData();
       const { fileList } = this;
+      if(this.fileList.length == 0){
+        this.$message.warning("至少上传一张图片！")
+        return
+      }
       if(fileList.length !=0){
       fileList.forEach(file=>{
           console.log(file);
@@ -224,7 +229,18 @@ export default {
     }else{
         formData.append('fileVideo', null);
     }
-
+    let type="^[0-9]*[1-9][0-9]*$"; 
+    let r=new RegExp(type); 
+    let flag=r.test(this.form.price) ;
+    let priceTemp = this.form.price
+    if(priceTemp.match(/^[ ]*$/) || priceTemp.indexOf(" ")>-1){
+        this.$message.warning("价格输入不正确")
+    　　return ;
+    }
+    if(!flag){
+    　　this.$message.warning("价格输入不正确")
+    　　return ;
+    }
     
     let houseReleaseForm = {
         username:this.$store.state.userInfo.username,
@@ -237,10 +253,26 @@ export default {
         house_price:parseInt(this.form.price),
         house_type:this.selectHouseType
     }
+
+    for (let key of Object.keys(houseReleaseForm)) {
+      let mealName = houseReleaseForm[key];
+      if(mealName == '' || mealName == null){
+        this.$message.warning("选项未填写")
+    　　return ;
+      }
+    }
+
     formData.append('houseReleaseForm',JSON.stringify(houseReleaseForm))
-    console.log("上传参数",formData.get("houseReleaseForm"));
     HouseRelease(formData).then(res=>{
-        console.log(res);
+        if(res.code == 200){
+          this.$message.success("发布成功")
+        }else{
+          console.log(res.code);
+          this.$message.warning("发布失败，请重新发布")
+        }
+    }).catch(e=>{
+      console.log(e);
+      this.$message.warning("发布失败，请重新发布")
     })
     },
     onChange(value) {

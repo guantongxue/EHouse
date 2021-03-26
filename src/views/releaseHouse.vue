@@ -17,7 +17,7 @@
 import ReleaseHead from "../components/releaseHead.vue";
 import releaseHouseContent from "../components/releaseHouseContent.vue";
 import { mapActions, mapState } from "vuex";
-import {UserLogin} from "@/api/userService.js"
+import {UserLogin,SelectUseDetail} from "@/api/userService.js"
 export default {
   data() {
     return {};
@@ -67,8 +67,32 @@ export default {
     gotoIndex(){
         this.$router.push('/index')
     },
+    initUserInfo(){
+      let userName = '';
+      if(this.$store.state.userInfo != null){
+          userName = this.$store.state.userInfo.username
+      }
+      let body ={
+          username:userName
+      }
+      SelectUseDetail(body).then(res=>{
+          this.userInfoDetail= res.data;
+          if(res.code != 200){
+            this.$router.push('/index')
+            this.$message.warning('用户信息已失效请重新登录')
+            this.logout();
+          } 
+      }).catch(e=>{
+          this.$router.push('/index')
+          this.$message.warning('用户信息已失效请重新登录')
+          this.logout();
+          console.log(e)
+      })
+    },
   },
-  mounted() {},
+  mounted() {
+    this.initUserInfo();
+  },
 };
 </script>
 

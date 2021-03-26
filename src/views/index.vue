@@ -10,10 +10,11 @@
       >
 
       </layout-header>
-      <a-layout-content style="padding: 0 50px">
+      <!-- <a-layout-content :biz_type="$refs.crumd.clickedIndex" style="padding: 0 50px"> -->
+      <a-layout-content  style="padding: 0 50px">
         <!-- 分类 -->
-        <crumd></crumd>
-        <index-content></index-content>
+        <!-- <crumd ref="crumd"></crumd> -->
+        <index-content :selectCity="positionCity"></index-content>
         
 
         <!-- <div
@@ -33,7 +34,7 @@
 <script>
 import LayoutHeader from '../components/header.vue';
 import RightSlider from '../components/rightSlider.vue';
-import Crumd from '../components/crumd.vue';
+// import Crumd from '../components/crumd.vue';
 import IndexContent from '../components/indexContent.vue';
 import "../assets/css/content.css";
 import { mapActions,mapState} from 'vuex'
@@ -50,7 +51,7 @@ export default {
   components:{
     LayoutHeader,
     RightSlider,
-    Crumd,
+    // Crumd,
     IndexContent,
 
   },
@@ -108,6 +109,7 @@ export default {
     }
   },
   mounted(){
+
     getPosition().then(res=>{
       if(res.code == 200){
         this.positionCity = res.data.city
