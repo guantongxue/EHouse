@@ -11,23 +11,10 @@
       <a-col :span="17">
            <a-row>
                <a-col :span="3">
-                   <a-dropdown>
-                        <a class="ant-dropdown-link environment-button" >
-                        <a-icon type="menu"/>房源服务    
-                        </a>
-                        <a-menu slot="overlay" class="overlay_adst">
-                            <a-menu-item>
-                              <a href="javascript:;">购房</a>
-                             </a-menu-item>
-                            <a-menu-item>
-                              <a href="javascript:;">租房</a>
-                            </a-menu-item>
-                        </a-menu>
-                    </a-dropdown>
                </a-col>
                <a-col :span="8">
                 <!-- 搜索框 -->
-                <a-input-search class="search-input" placeholder="输入关键字" enter-button @search="onSearch" />
+                <a-input-search class="search-input" v-model="key_word" placeholder="输入关键字" enter-button @search="onSearch" />
                </a-col>
                <a-col :span="13">
                  <a-row class="environment-button">
@@ -88,7 +75,8 @@ export default {
     },
     data() {
         return {
-          visible:false
+          visible:false,
+          key_word:"",
         };
     },
     components:{
@@ -96,7 +84,7 @@ export default {
     },
     methods:{
         onSearch(){
-
+          this.$emit("onSearch")
         },
         callback(val) {
         console.log(val);

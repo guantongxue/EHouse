@@ -32,7 +32,7 @@ const instance = axios.create({
       config.headers.refreshToken = refreshToken
       config.headers.type = '1'
     }
-    if(config.url == 'house/release'){
+    if(config.url == 'house/release' || config.url == '/house/editHouseRelease'){
       // config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
       config.headers['Content-Type'] = 'multipart/form-data;boundary =' + new Date().getTime()
 

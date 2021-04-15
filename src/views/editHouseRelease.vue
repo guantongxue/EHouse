@@ -4,27 +4,29 @@
       @gotoPerson="gotoPerson"
       @logout="logoutContent"
       @userLogin="userLogin"
-      :headTitle="'发布房源'"
+      :headTitle="'修改发布房源'"
       @gotoIndex="gotoIndex"
       ref="releaseHead"
     >
     </release-head>
-    <release-house-content></release-house-content>
+    <edit-house-release-content ></edit-house-release-content>
   </div>
 </template>
 
 <script>
 import ReleaseHead from "../components/releaseHead.vue";
-import releaseHouseContent from "../components/releaseHouseContent.vue";
+import editHouseReleaseContent from "../components/editHouseRelease/editReleaseContent.vue";
 import { mapActions, mapState } from "vuex";
 import {UserLogin,SelectUseDetail} from "@/api/userService.js"
 export default {
   data() {
-    return {};
+    return {
+        
+    };
   },
   components: {
     ReleaseHead,
-    releaseHouseContent,
+    editHouseReleaseContent,
   },
   computed: {},
   methods: {

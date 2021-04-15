@@ -11,10 +11,16 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+//vue-video-player
+import VideoPlayer from 'vue-video-player'
+import 'vue-video-player/src/custom-theme.css'
+import 'video.js/dist/video-js.css'
+
 Vue.config.productionTip = false
 
 Vue.use(Antd);
 Vue.use(VueAxios, axios)
+Vue.use(VideoPlayer)
 
 /* eslint-disable no-new */
 new Vue({

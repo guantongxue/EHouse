@@ -69,7 +69,8 @@ export default {
 
       positionCity:{
         type:String
-      }
+      },
+
     },
     data() {
         return {

@@ -3,10 +3,10 @@
     <!-- <a-collapse default-active-key="1" :bordered="false" :expandIconPosition="'right'"> -->
     <index-tag ref="indexTag" @handleClose="handleClose"></index-tag>
     <ul class="ul-content">
-      <li class="liprice">
+      <li >
         <span class="firstLi"
-          >城 市:
-          <a-dropdown>
+          ><span class="li-title">城 市:</span>
+          <a-dropdown class="areaTitle2">
             <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
               {{ nowCity }} <a-icon type="down" />
             </a>
@@ -22,7 +22,7 @@
       </li>
       <li class="liprice">
         <span class="firstLi"
-          >区 域:<span
+          ><span class="li-title">区 域:</span><span
             @click="changeTag(value, '1')"
             class="areaTitle"
             v-for="(value, index) in areaList"
@@ -32,7 +32,7 @@
       </li>
       <li class="liprice">
         <span class="firstLi"
-          >房 型:<span
+          ><span class="li-title">房 型:</span><span
             @click="changeTag(value, '2')"
             class="areaTitle"
             v-for="(value, index) in houseTypeList"
@@ -42,7 +42,7 @@
       </li>
       <li class="liprice">
         <span class="firstLi"
-          >环 境:<span
+          ><span class="li-title">环 境:</span><span
             @click="changeTag(value, '3')"
             class="areaTitle"
             v-for="(value, index) in envirList"
@@ -52,7 +52,7 @@
       </li>
       <li class="lipriceLast">
         <span class="firstLi"
-          >价 格:
+          ><span class="li-title">价 格:</span>
           <a-input-group compact>
             <a-select default-value="1" @select="selectInput">
               <a-select-option value="1"> 单位:元 </a-select-option>
@@ -202,8 +202,12 @@ export default {
         });
       }
     },
-    handleClose() {
-      console.log("标签关闭");
+    handleClose(val) {
+      console.log("标签关闭",val);
+      if(val == 4){
+        this.minPrice = "";
+        this.maxPrice = "";
+      }
       this.$emit('SelectHouseList')
     },
     selectInput(value) {
@@ -214,6 +218,7 @@ export default {
       }
     },
     initAllArea(city) {
+      
       let body = {
         city: city,
       };
@@ -307,15 +312,24 @@ ul li {
 }
 .firstLi {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   color: #999;
+  /* color: black; */
   display: inline-block;
+}
+.li-title{
+  font-weight: bold;
+  color: #666666;
 }
 .liarea {
   display: inline-block;
 }
 .areaTitle {
   padding-left: 15px;
+  cursor: pointer;
+}
+.areaTitle2 {
+  padding-left: 11px;
   cursor: pointer;
 }
 .areaTitle:hover {

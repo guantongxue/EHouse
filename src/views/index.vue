@@ -7,6 +7,7 @@
       :positionCity="positionCity"
       @gotoPerson="gotoPerson"
       @gotoRelease="gotoRelease"
+      @onSearch="onSearch"
       >
 
       </layout-header>
@@ -14,7 +15,7 @@
       <a-layout-content  style="padding: 0 50px">
         <!-- 分类 -->
         <!-- <crumd ref="crumd"></crumd> -->
-        <index-content :selectCity="positionCity"></index-content>
+        <index-content ref="indexContent" :selectCity="positionCity" @clearKeyWord="clearKeyWord"></index-content>
         
 
         <!-- <div
@@ -106,6 +107,13 @@ export default {
         return
       }
       this.$router.push("/releaseHouse")
+    },
+    onSearch(){
+      this.$refs.indexContent.key_word = this.$refs.layout_header.key_word;
+      this.$refs.indexContent.SelectHouse(this.$refs.layout_header.key_word);
+    },
+    clearKeyWord(){
+      this.$refs.layout_header.key_word = ""
     }
   },
   mounted(){

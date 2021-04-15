@@ -1,9 +1,14 @@
 <template>
   <div class="indexContent">
- 
-     <crumd ref="crumd" @SelectHouseList="SelectHouse"></crumd>      
-      <classification ref="classification" :selectCity="selectCity" @ChangeSelectCity="ChangeSelectCity" @SelectHouseList="SelectHouse"></classification>
-      <index-resouce-list :houseResouceList="HouseResouse" :count="count" ref="resouceList" @onChange="onChange" @SelectHouseList="SelectHouse"></index-resouce-list>
+      <crumd ref="crumd" @SelectHouseList="changIndex"></crumd>   
+      <div class="content-adst">
+        <classification ref="classification" 
+        :selectCity="selectCity" 
+        @ChangeSelectCity="ChangeSelectCity" 
+        @SelectHouseList="SelectHouseList"></classification>
+        <index-resouce-list :houseResouceList="HouseResouse" :count="count" ref="resouceList" @onChange="onChange" @SelectHouseList="SelectHouse"></index-resouce-list>
+      </div>   
+     
   </div>
 </template>
 
@@ -18,7 +23,8 @@ export default {
             current_page : 1,
             page_size : 15,
                 HouseResouse:[],
-            count:0
+            count:0,
+            key_word:''
         }
     },
     props:{
@@ -33,7 +39,8 @@ export default {
 
     },
     methods:{
-        SelectHouse(){
+        SelectHouse(key){
+            
             //区域
             let areaTemp =null;
             if(this.$refs.classification.$refs.indexTag.tags[1].val != ''){
@@ -90,6 +97,17 @@ export default {
             if(this.$refs.resouceList.checkList.asc){
                 price_orderTemp = 2
             }
+            //关键字
+            let key_word_temp = null
+            if(key != null){
+                if(key.trim() != ''){
+                    this.key_word = key.trim()
+                    key_word_temp = key.trim()
+                }
+            }else{
+                this.key_word = ""
+                this.$emit('clearKeyWord')
+            }
             let body = {
                 city:this.$refs.classification.nowCity,
                 area:areaTemp,
@@ -101,22 +119,47 @@ export default {
                 price_order:price_orderTemp,
                 current_page:parseInt(this.current_page-1),
                 page_size:this.page_size,
+                key_word:key_word_temp
             }
+        
             SelectHouseByOption(body).then(res=>{
                 console.log("房源查询数据",res);
                 this.count = res.data.count
                 this.HouseResouse = res.data.houseResouceListList
-
             }).catch(e=>{
                 this.$message.error('房源查询数据失败')
             })
         },
         onChange(page){
             this.current_page = page
+            if(this.key_word != ""){
+                this.SelectHouse(this.key_word)
+            }else{
+                this.SelectHouse()
+            }
+            
         },
         //城市修改
         ChangeSelectCity(){
+            this.current_page = 1
             this.SelectHouse();
+        },
+        SelectHouseList(){
+            this.current_page = 1
+            this.SelectHouse();
+        },
+        changIndex(){
+            this.$refs.classification.minPrice =""
+            this.$refs.classification.maxPrice =""
+            this.$refs.classification.$refs.indexTag.tags[4].val = ''
+            if(this.$refs.crumd.clickedIndex ==0){
+                this.$refs.classification.$refs.indexTag.tags[0].val = "全部分类"
+            }else if(this.$refs.crumd.clickedIndex ==1){
+                this.$refs.classification.$refs.indexTag.tags[0].val = "买房"
+            }else if(this.$refs.crumd.clickedIndex ==2){
+                this.$refs.classification.$refs.indexTag.tags[0].val = "租房"
+            }
+            this.SelectHouseList();
         }
     },
     mounted(){
@@ -130,7 +173,12 @@ export default {
 
 .indexContent{
     width: 100%;
-    min-height: 1200px;
+    /* min-height: 1200px; */   
+    background: white;
+}
+.content-adst{
+    width: 100%;
+    /* min-height: 1200px; */
     padding-left: 8%;
     padding-right: 8%;
     background: white;

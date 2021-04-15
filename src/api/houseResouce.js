@@ -21,3 +21,30 @@ export const GetAllCity = (params) => request.get(port.GetAllCity,params)
 
 //根据条件查询房源资源
 export const SelectHouseByOption = (params) => request.post(port.SelectHouseByOption,params)
+
+//根据ID查询房源资源
+export const GetHouseResouceById = (params) => request.post(port.GetHouseResouceById,params)
+
+//查询收藏状态
+export const GetCollectionStatus = (params) => request.post(port.GetCollectionStatus,params)
+
+//收藏房源
+export const HouseIsCollection = (params) => request.post(port.HouseIsCollection,params)
+
+//取消收藏房源
+export const CancleCollection = (params) => request.post(port.CancleCollection,params)
+
+//查询自己发布的房源
+export const GetMyReleaseHouse = (params) => request.post(port.GetMyReleaseHouse,params)
+
+//删除自己的的房源
+export const DelMyReleaseHouse = (params) => request.post(port.DelMyReleaseHouse,params)
+
+//查询个人的收藏房源信息
+export const SelectMyCollection = (params) => request.post(port.SelectMyCollection,params)
+
+//修改个人发布房源信息
+export const EditHouseRelease = (params) => request.filePost(port.EditHouseRelease,params)
+
+
+

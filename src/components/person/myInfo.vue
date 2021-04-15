@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- 用户名:{{userInfoDetail.username}}
-    {{userInfoDetail.authority =='1'?'普通用户':'企业用户'}}用户i
-    用户密码:{{userInfoDetail.password}}
-    用户描述:{{userInfoDetail.user_desc}}
-    绑定手机:{{userInfoDetail.tel_phone}}
-    身份证号码:{{userInfoDetail.id_card}} -->
     <div></div>
     <div class="info-content">
         <ul>

@@ -5,7 +5,7 @@
         <img src="../assets/ehouse.svg" class="logo" @click="gotoIndex"/>
       </a-col>
       <a-col :span="5" class="head-title">
-        <span >发布房源</span>
+        <span >{{headTitle}}</span>
       </a-col>
       <a-col :span="17">
            <a-row>
@@ -67,6 +67,9 @@ export default {
       // userInfo:{
       //   type:Object
       // }
+      headTitle:{
+        type:String
+      }
     },
     data() {
         return {

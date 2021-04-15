@@ -6,10 +6,11 @@
       :positionCity="positionCity"
       @gotoRelease="gotoRelease"
       @gotoPerson="gotoPerson"
+      
     >
     </resouce-header>
-    <resouce-content></resouce-content>
-    11
+    <resouce-content  :id="$route.params.id" @userLogin="pleaseLogin"></resouce-content>
+    
     <right-slider></right-slider>
   </div>
 </template>
@@ -20,6 +21,7 @@ import ResouceContent from "../components/resouceShow/resouceContent";
 import { UserLogin } from "@/api/userService.js";
 import { getPosition } from "@/api/map.js";
 import RightSlider from '../components/rightSlider.vue';
+
 export default {
   name: "",
   components: {
@@ -75,6 +77,9 @@ export default {
     gotoPerson(){
       this.$router.push("/person/myCollection")
     },
+    pleaseLogin(){
+      this.$refs.layout_header.visible = true
+    }
   },
   mounted() {
     getPosition().then((res) => {
@@ -83,6 +88,7 @@ export default {
       }
       console.log("res", res);
     });
+
   },
 };
 </script>

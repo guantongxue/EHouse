@@ -5,6 +5,8 @@ import register  from "@/views/register";
 import person  from "@/views/person";
 import houseResouce  from "@/views/houseResouce";
 import releaseHouse  from "@/views/releaseHouse";
+import editHouseRelease  from "@/views/editHouseRelease";
+import chat  from "@/views/chat";
 import myCollection from "@/components/person/myCollection";
 import myInfo from "@/components/person/myInfo";
 import myRelease from "@/components/person/myRelease";
@@ -66,6 +68,16 @@ const routes = [
     path:'/houseResouce/:id',
     name:'houseResouce',
     component: houseResouce  //房源展示界面
+  },
+  {
+    path:'/editHouseRelease/:userId',
+    name:'editHouseRelease',
+    component: editHouseRelease  //修改发布房源信息
+  },
+  {
+    path:'/chat/:userName',
+    name:'chat',
+    component: chat  //聊天界面
   }
 
 ]

@@ -43,7 +43,9 @@ export default {
 </script>
 <style  scoped>
 .crmd-content{
-/* border-bottom: 1px solid rgb(190, 186, 186); */
+    /* border-bottom: 1px solid rgb(190, 186, 186); */
+    padding-left: 8%;
+    background-color: #F5F5F8;
 }
 ul li{
     list-style: none;

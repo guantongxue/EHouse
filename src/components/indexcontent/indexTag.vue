@@ -47,13 +47,15 @@ export default {
     handleClose(removedTag) {
       const tags = this.tags.filter(tag => tag !== removedTag);
       this.tags = tags;
-      
+      console.log(removedTag);
+      let pid = -99
       this.tags.forEach((val,index)=>{
         if(this.tags[index].val == removedTag){
             this.tags[index].val = ""
+            pid = index
         }
       })
-      this.$emit("handleClose")
+      this.$emit("handleClose",pid)
     },
 
     showInput() {

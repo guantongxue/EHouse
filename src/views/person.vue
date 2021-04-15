@@ -6,12 +6,13 @@
       @userLogin="userLogin"
       @gotoPerson="gotoPerson"
       @gotoIndex="gotoIndex"
+      @gotoRelease="gotoRelease"
+      :headTitle="'个人中心'"
     >
     </layout-header>
     <a-layout id="components-layout-demo-custom-trigger">
       <a-layout-sider v-model="collapsed" :trigger="null" collapsible theme="light" class="sider-adst">
         <div>
-            <!-- @click="() =>{collapsed = !collapsed} " -->
         <a-icon
             class="trigger trigger-adst"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
@@ -128,6 +129,9 @@ export default {
         }else{
             this.leftAdst = '235px'
         }
+    },
+    gotoRelease(){
+      this.$router.push("/releaseHouse")
     }
   },
   created(){

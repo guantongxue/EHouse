@@ -5,12 +5,14 @@
         <img src="../assets/ehouse.svg" class="logo" @click="gotoIndex"/>
       </a-col>
       <a-col :span="5" class="head-title">
-        <span >个人中心</span>
+        <span >{{headTitle}}</span>
       </a-col>
       <a-col :span="17">
            <a-row>
                <a-col :span="3">
-                  
+                  <div  class="goto-index" @click="gotoIndex">
+                    <a-icon type="home"/>首页  
+                  </div>  
                </a-col>
                <a-col :span="8">
                 <!-- 搜索框 -->
@@ -19,7 +21,7 @@
                  <a-row class="environment-button">
                    <a-col :span="5"></a-col>
                    <a-col :span="8">
-                    
+                    <span @click="gotoRelease" class="release">发布房源</span>
                    </a-col>
                    <a-col :span="8"></a-col>
                    <a-col :span="3">
@@ -64,9 +66,9 @@ import Login from './login.vue';
 
 export default {
     props:{
-      // userInfo:{
-      //   type:Object
-      // }
+      headTitle:{
+        type:String
+      }
     },
     data() {
         return {
@@ -101,7 +103,10 @@ export default {
         },
         gotoIndex(){
           this.$emit("gotoIndex")
-        }
+        },
+        gotoRelease(){
+          this.$emit("gotoRelease")
+        },
     },
     computed:{
       // ...mapState(['userInfo']),
@@ -112,7 +117,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .logo{
   display: block;
   width: 120px;
@@ -149,5 +155,11 @@ export default {
   font-size: 18px;
   font-weight: 500;
   color: black;
+}
+.goto-index:hover{
+  color: #FF787E;
+}
+.release:hover{
+  color: #FF787E;
 }
 </style>

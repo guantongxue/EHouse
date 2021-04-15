@@ -127,6 +127,9 @@ function getBase64(file) {
 }
 export default {
   name: "",
+  props:{
+
+  },
   data() {
     return {
       previewVisible: false,
