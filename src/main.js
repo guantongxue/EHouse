@@ -18,7 +18,7 @@ import 'video.js/dist/video-js.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Antd);
+Vue.use(Antd)
 Vue.use(VueAxios, axios)
 Vue.use(VideoPlayer)
 

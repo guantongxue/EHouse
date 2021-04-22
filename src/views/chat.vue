@@ -211,6 +211,7 @@ export default {
       if (messageType == "chat") {
         if (chatId == this.userId) {
           this.$message.warning("不能给自己发私聊信息,请换个好友吧");
+          return
         }
         
         let item = {  
@@ -237,8 +238,7 @@ export default {
       }
     },
     //接收消息处理方法
-    onmessage(jsonData) {
-      
+    onmessage(jsonData) {    
       let item = {
           chatId: jsonData.chatId,
           message: jsonData.message,
@@ -247,7 +247,7 @@ export default {
           userId: jsonData.userId,
       };
       this.addChat(item);
-      this.message = ""
+      this.message = "";
     },
     //发送消息
     onSend() {
@@ -297,9 +297,8 @@ export default {
             if (res.code === 200) {
               console.log("消息列表", res);
               this.chatCheckList = res.data;
-              
               this.checkArrayByChatId();
-              this.getCheckChatIndex()
+              this.getCheckChatIndex();
               resolve("ok");
             } else {
               this.$message.error("初始化消息列表失败");
@@ -322,20 +321,19 @@ export default {
             if (res.code === 200 && res.data != null) {
               this.chatId = res.data.id;
               this.checkChatId = res.data.id;
-              console.log("chatId", this.chatId);
               this.userList = [];
 
               this.chatList = [{ chatId: this.chatId, data: [] }];
 
               this.userList.push({ uid: this.chatId });
             } else {
-              this.$message.warning("对方账号不存在，请重新登录");
+              this.$message.warning("对方账号不存在，无法在线联系");
               this.$router.push("/index");
             }
             resolve("ok");
           })
           .catch((e) => {
-            this.$message.warning("对方账号不存在，请重新登录");
+            this.$message.warning("对方账号不存在，无法在线联系");
             this.$router.push("/index");
             resolve("fail");
           });
@@ -359,7 +357,6 @@ export default {
           dest = [];
         for (let i = 0; i < this.chatCheckList.length; i++) {
           let ai = this.chatCheckList[i];
-          console.log("ai", ai);
           let chatFlag = "";
           if (parseInt(ai.chatId) > parseInt(ai.userId)) {
             chatFlag = ai.chatId + "&&" + ai.userId;
@@ -382,14 +379,22 @@ export default {
             }
           }
         }
-        console.log("dest", dest);
         this.chatList = dest;
         this.isHasThisChat()
+      }else{
+        //如果缓存没有数据的话，默认 
+        this.chatList = [];
+        let chatFlag = "";
+        if (parseInt(this.chatId) > parseInt(this.userId)) {
+          chatFlag = this.chatId + "&&" + this.userId;
+        } else {
+          chatFlag = this.userId + "&&" + this.chatId;
+        }
+        this.chatList = [{chatId: chatFlag,data: []}]
       }
     },
     //判断消息记录中是否有这个聊天记录没有则添加
     isHasThisChat(){
-      console.log("数据2",this.chatList);
       let flag = false
       let chatFlag = "";
       if (parseInt(this.chatId) > parseInt(this.userId)) {
@@ -409,12 +414,9 @@ export default {
         }
         this.chatList.push(item)
       }
-      console.log("数据",this.chatList);
     },
     //发送消息和接受收消息进行数据渲染
     addChat(arr) {
-      console.log("当前添加的消息", arr);
-      console.log("当前添加的消息2", this.chatList);
       let chatFlag = "";
       if (parseInt(arr.chatId) > parseInt(arr.userId)) {
         chatFlag = arr.chatId + "&&" + arr.userId;
@@ -422,7 +424,6 @@ export default {
         chatFlag = arr.userId + "&&" + arr.chatId;
       }
       let flag = false;
-      // if()
       for (let i = 0; i < this.chatList.length; i++) {
         if (this.chatList[i].chatId === chatFlag) {
           flag = true;

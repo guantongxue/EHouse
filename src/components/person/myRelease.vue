@@ -4,7 +4,7 @@
       <a-col :span="12" >
         <div>  
           <a-checkbox class="paixu" :checked="checkList.new" @change="onChangeNew">
-          最迟发布
+          最新发布
           </a-checkbox>
           <a-checkbox class="paixu" :checked="checkList.old" @change="onChangeOld">
           最早发布
